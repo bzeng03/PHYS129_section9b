@@ -72,7 +72,7 @@ def display_confusion(model):
     
     ax.set_xlabel('Predicted')
     ax.set_ylabel('Actual')
-    plt.show()
+    plt.savefig('plot.png')
 
 
 if __name__ == '__main__':
@@ -92,10 +92,11 @@ if __name__ == '__main__':
         losses = cnn.train(train_images, train_labels, [0.2] * 256)
         cnn.save(CNN_WEIGHTS_PATH)
         plt.plot(losses)
-        plt.show()
-        plt.savefig("plot_cnn_mnist.png")
+        plt.savefig('training_loss.png')
+        plt.savefig('plot.png')
     
     display_confusion(cnn)
+    plt.savefig('cnn_confusion_matrix.png')
 
     mlp = MLP(
         layer_sizes=[train_images[0].size, 700, 500, 10],
@@ -110,7 +111,8 @@ if __name__ == '__main__':
         losses = mlp.train(train_images, train_labels, [0.2] * 256, 64)
         mlp.save(MLP_WEIGHTS_PATH)
         plt.plot(losses)
-        plt.show()
-        plt.savefig("plot_mlp_mnist.png")
+        plt.savefig('training_loss.png')
+        plt.savefig('plot.png')
     
     display_confusion(mlp)
+    plt.savefig('mlp_confusion_matrix.png')
